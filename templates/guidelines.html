@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interview Guidelines</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0d1427, #1a2a6c, #b21f1f, #fdbb2d);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+      width: 90%;
+      max-width: 600px;
+      color: #fff;
+      text-align: left;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    p {
+      font-size: 1.05rem;
+      color: #e0e0e0;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 30px 0;
+    }
+
+    ul li {
+      font-size: 1rem;
+      color: #f1f1f1;
+      margin: 12px 0;
+      padding-left: 25px;
+      position: relative;
+    }
+
+    ul li::before {
+      content: "✔";
+      position: absolute;
+      left: 0;
+      color: #4a6cf7;
+      font-weight: bold;
+    }
+
+    .btn {
+      display: block;
+      margin: 0 auto;
+      padding: 14px 32px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(135deg, #4a6cf7, #3548d4);
+      border: none;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0px 4px 12px rgba(74, 108, 247, 0.4);
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      background: linear-gradient(135deg, #3548d4, #2236a8);
+      box-shadow: 0px 6px 16px rgba(74, 108, 247, 0.6);
+    }
+
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+  <div class="container">
+    <h1>Excel Interview Guidelines</h1>
+    <p>Welcome to the Excel Mock Interview for finance, operations, and analytics roles.</p>
+    <ul>
+      <li>You will answer <strong>{{ num_questions }}</strong> questions.</li>
+      <li>Each question tests your Excel knowledge and skills.</li>
+      <li>Provide clear and concise answers in the text box provided.</li>
+      <li>Your answers will be evaluated for accuracy, completeness, and clarity.</li>
+      <li>After completion, you will receive a summary with scores and feedback via email.</li>
+    </ul>
+    <form action="{{ url_for('start', session_id=session_id) }}">
+      <button type="submit" class="btn">📋 Begin Interview</button>
+    </form>
+  </div>
+
+  <script>
+    particlesJS('particles-js', {
+      "particles": {
+        "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+        "color": { "value": "#ffffff" },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.3 },
+        "size": { "value": 3, "random": true },
+        "line_linked": { "enable": true, "distance": 120, "color": "#ffffff", "opacity": 0.2, "width": 1 },
+        "move": { "enable": true, "speed": 3 }
+      },
+      "interactivity": {
+        "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } },
+        "modes": { "repulse": { "distance": 150, "duration": 0.4 } }
+      },
+      "retina_detect": true
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+Flask
+pandas
+python-dotenv
+firebase-admin
+google-generativeai
+openpyxl
+gunicorn
