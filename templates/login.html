@@ -7,9 +7,8 @@
   <style>
     body {
       font-family: 'Inter', Arial, sans-serif;
-      background: linear-gradient(135deg, #d0ddf7, #f3f6fc);
+      background: linear-gradient(135deg, #ff000052, #0055ff52);
       margin: 0;
-      padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -18,23 +17,31 @@
 
     .login-container {
       background: #fff;
-      padding: 40px 35px;
+      padding: 36px 28px;
       border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 10px 30px rgba(255, 255, 255, 1);
       max-width: 420px;
-      width: 100%;
+      width: 92%;
       text-align: center;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .login-container:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+    @media (hover: hover) and (pointer: fine) {
+      .login-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 14px 36px rgba(0,0,0,0.18);
+      }
+
+      button:hover {
+        background: linear-gradient(135deg, #005fa3, #004080);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(0,120,215,0.3);
+      }
     }
 
     h1 {
-      font-size: 24px;
-      margin-bottom: 25px;
+      font-size: 26px;
+      margin-bottom: 24px;
       color: #222;
       font-weight: 700;
     }
@@ -49,11 +56,11 @@
     }
 
     input {
-      width: 100%;
-      padding: 12px;
+      width: 90%;
+      padding: 13px;
       border: 1px solid #d1d9e6;
       border-radius: 8px;
-      margin-bottom: 18px;
+      margin-bottom: 12px;
       font-size: 15px;
       outline: none;
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -61,7 +68,7 @@
 
     input:focus {
       border-color: #0078d7;
-      box-shadow: 0 0 6px rgba(0, 120, 215, 0.3);
+      box-shadow: 0 0 8px rgba(0,120,215,0.3);
     }
 
     button {
@@ -77,10 +84,11 @@
       transition: all 0.3s ease;
     }
 
-    button:hover {
-      background: linear-gradient(135deg, #005fa3, #004080);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0, 120, 215, 0.3);
+    @media (hover: none) and (pointer: coarse) {
+      button:active {
+        background: #005fa3;
+        transform: scale(0.97);
+      }
     }
 
     .note {
@@ -89,15 +97,15 @@
       margin-top: 15px;
     }
 
-    .note a {
-      color: #0078d7;
-      text-decoration: none;
-      transition: color 0.2s ease;
+    .info {
+      font-size: 12.5px;
+      color: #666;
+      margin-bottom: 18px;
+      text-align: left;
     }
 
-    .note a:hover {
-      color: #005fa3;
-      text-decoration: underline;
+    .info span {
+      font-weight: 600;
     }
 
     .error {
@@ -110,7 +118,13 @@
 </head>
 <body>
   <div class="login-container">
-    <h1>Excel Interview Login</h1>
+    <h1>AI Interviewer</h1>
+    <p style="font-size: 13px; color: #555; margin-top: 0px; text-align: center;">
+      <a href="https://mokshbhardwaj.netlify.app" 
+         style="color: #48484885; text-decoration: none; font-weight: 600;">
+         Powered by Moksh Bhardwaj
+      </a>
+    </p>
     {% if error %}
       <p class="error">{{ error }}</p>
     {% endif %}
@@ -120,17 +134,11 @@
 
       <label for="email">Email Address</label>
       <input type="email" name="email" id="email" placeholder="you@example.com" required>
+      <p class="info">📧 <span>We’ll email your interview summary after completion.</span></p>
 
       <button type="submit">Start Interview</button>
     </form>
     <p class="note">Number of questions: <strong>{{ num_questions }}</strong></p>
-<p style="font-size: 13px; color: #555; margin-top: 20px; text-align: center;">
-  <a href="https://mokshbhardwaj.netlify.app" 
-     style="color: #343434ff; text-decoration: none; font-weight: 600;">
-     Powered by Moksh Bhardwaj
-  </a>
-</p>
   </div>
-  
 </body>
 </html>

@@ -7,65 +7,110 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #f9fafc;
+            background: linear-gradient(135deg, #ff000052, #0055ff52);
             margin: 0;
-            padding: 0;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: flex-start;
             min-height: 100vh;
         }
+
         .summary-container {
             background: #fff;
             margin: 40px auto;
-            padding: 30px 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 32px 36px;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
             max-width: 700px;
             width: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
+        @media (hover: hover) and (pointer: fine) {
+            .summary-container:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 10px 28px rgba(0,0,0,0.15);
+            }
+        }
+
         h1 {
-            font-size: 24px;
+            font-size: 26px;
             color: #333;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
             text-align: center;
         }
+
         h2 {
             font-size: 20px;
             margin-top: 30px;
+            margin-bottom: 12px;
             color: #0078d7;
         }
+
         p {
             font-size: 14px;
             color: #444;
             line-height: 1.6;
+            margin: 6px 0;
         }
+
         strong {
             color: #000;
         }
+
         hr {
             border: 0;
             border-top: 1px solid #eee;
-            margin: 20px 0;
+            margin: 18px 0;
         }
+
         .score-box {
             background: #eef6ff;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
+            padding: 18px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            transition: background 0.3s ease;
         }
+
+        @media (hover: hover) and (pointer: fine) {
+            .score-box:hover {
+                background: #e0edff;
+            }
+        }
+
         .btn {
             display: inline-block;
             margin-top: 20px;
-            padding: 12px 20px;
+            padding: 14px 24px;
             background: #0078d7;
             color: #fff;
             text-decoration: none;
-            border-radius: 6px;
+            border-radius: 8px;
             font-weight: bold;
+            transition: all 0.3s ease;
         }
+
         .btn:hover {
             background: #005fa3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+
+        em {
+            display: block;
+            margin-top: 16px;
+            font-size: 13px;
+            color: #555;
+            text-align: center;
+        }
+
+        @media (max-width: 480px) {
+            .summary-container { padding: 24px 20px; margin: 20px auto; }
+            h1 { font-size: 22px; }
+            h2 { font-size: 18px; }
+            .btn { padding: 12px 20px; font-size: 14px; }
+            .score-box { padding: 14px; }
         }
     </style>
 </head>

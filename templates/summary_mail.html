@@ -8,73 +8,102 @@
   <style>
     body {
       font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-      color: #2c3e50;
       background: linear-gradient(135deg, #eef2f7, #d9e4ff);
       margin: 0;
       padding: 20px;
+      color: #2c3e50;
     }
+
     .container {
       max-width: 700px;
       margin: 0 auto;
       background: #fff;
-      padding: 30px;
-      border-radius: 14px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      padding: 28px 24px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     }
+
     h1 {
       color: #1a237e;
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
       font-weight: 700;
+      font-size: 26px;
     }
+
     h2 {
       color: #34495e;
       margin-bottom: 10px;
+      font-size: 18px;
     }
+
     p {
-      margin: 8px 0;
+      margin: 6px 0;
+      line-height: 1.5;
     }
+
     .important {
       font-weight: 600;
       color: #c0392b;
       background: #fdecea;
-      padding: 12px;
+      padding: 12px 14px;
       border-left: 4px solid #e74c3c;
-      border-radius: 6px;
-      margin: 20px 0;
+      border-radius: 8px;
+      margin: 18px 0;
+      font-size: 14px;
     }
+
     .section {
-      margin-bottom: 25px;
+      margin-bottom: 28px;
     }
+
     .score-badge {
       display: inline-block;
-      background: #4a6cf7;
-      color: #fff;
-      font-size: 0.95rem;
       padding: 6px 14px;
       border-radius: 20px;
       font-weight: 600;
-      margin: 5px 0;
+      font-size: 0.95rem;
+      color: #fff;
+      margin: 4px 0;
     }
+
+    /* Score color coding */
+    .score-high { background: #4caf50; }
+    .score-medium { background: #ff9800; }
+    .score-low { background: #f44336; }
+
     .feedback-item {
       border: 1px solid #eee;
-      border-radius: 8px;
-      padding: 15px;
+      border-radius: 10px;
+      padding: 14px;
       margin-bottom: 12px;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      background: #fafafa;
     }
-    .feedback-item:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+    @media (hover: hover) and (pointer: fine) {
+      .feedback-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      }
     }
+
     .footer {
       text-align: center;
-      font-size: 0.9em;
+      font-size: 0.88em;
       color: #7f8c8d;
-      margin-top: 20px;
+      margin-top: 22px;
       border-top: 1px solid #eee;
-      padding-top: 15px;
+      padding-top: 16px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+      .container { padding: 20px 16px; }
+      h1 { font-size: 22px; }
+      h2 { font-size: 16px; }
+      .score-badge { font-size: 0.85rem; padding: 5px 12px; }
+      .important { font-size: 13px; padding: 10px 12px; }
     }
   </style>
 </head>
@@ -82,14 +111,22 @@
   <div class="container">
     <h1>Excel Interview Summary</h1>
     <p>Dear {{ user_name }},</p>
+
     <p class="important">
       <strong>Important:</strong> Your User ID is: {{ user_id }}<br>
-      Please save this User ID to log in for future interviews. Do not share it.
+      Save it for future logins. Do not share it.
     </p>
 
     <div class="section">
       <h2>Performance Overview</h2>
-      <p><strong>Average Score:</strong> <span class="score-badge">{{ summary_data.avg_score | round(2) }}/{{ max_score }}</span></p>
+      {% set avg = summary_data.avg_score | round(2) %}
+      <p>
+        <strong>Average Score:</strong> 
+        <span class="score-badge 
+          {% if avg >= 80 %}score-high{% elif avg >= 50 %}score-medium{% else %}score-low{% endif %}">
+          {{ avg }}/{{ max_score }}
+        </span>
+      </p>
       <p><strong>Strengths:</strong> {{ summary_data.strengths }}</p>
       <p><strong>Weaknesses:</strong> {{ summary_data.weaknesses }}</p>
     </div>
@@ -97,16 +134,17 @@
     <div class="section">
       <h2>Detailed Feedback</h2>
       {% for question, feedback, score in summary_data.detailed_feedback %}
+      {% set score_class = 'score-low' if score < 50 else 'score-medium' if score < 80 else 'score-high' %}
       <div class="feedback-item">
         <p><strong>Question:</strong> {{ question }}</p>
-        <p><strong>Score:</strong> <span class="score-badge">{{ score }}/{{ max_score }}</span></p>
+        <p><strong>Score:</strong> <span class="score-badge {{ score_class }}">{{ score }}/{{ max_score }}</span></p>
         <p><strong>Feedback:</strong> {{ feedback }}</p>
       </div>
       {% endfor %}
     </div>
 
     <div class="footer">
-      <p>Thank you for using our Excel Interview platform. For further inquiries, please contact us.</p>
+      <p>Thank you for using our Excel Interview platform. Contact us for any questions.</p>
       <p>&copy; {{ current_year }} Excel Interview Platform</p>
     </div>
   </div>
