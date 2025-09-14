@@ -27,7 +27,7 @@
     }
 
     .container {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.37);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       padding: 40px;
@@ -121,8 +121,14 @@
       <li>After completion, you will receive a summary with scores and feedback via email.</li>
     </ul>
     <form action="{{ url_for('start', session_id=session_id) }}">
-      <button type="submit" class="btn">📋 Begin Interview</button>
+      <button type="submit" class="btn">Begin Interview >></button>
     </form>
+    <p style="font-size: 13px; color: #555; margin-bottom: 5px; text-align: center;">
+  <a href="https://mokshbhardwaj.netlify.app" 
+     style="color: #d8d8d88b; text-decoration: none; font-weight: 600;">
+     Powered by Moksh Bhardwaj
+  </a>
+</p>
   </div>
 
   <script>
@@ -143,5 +149,6 @@
       "retina_detect": true
     });
   </script>
+  
 </body>
 </html>
