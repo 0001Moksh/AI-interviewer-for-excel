@@ -405,6 +405,49 @@ def handle_shutdown(signum, frame):
 signal.signal(signal.SIGINT, handle_shutdown)
 signal.signal(signal.SIGTERM, handle_shutdown)
 
+@app.route("/leaderboard")
+def leaderboard():
+    try:
+        # Fetch all users from Firestore
+        users_ref = db.collection("users").stream()
+        leaderboard_data = []
+
+        # Iterate through users and their interviews
+        for user in users_ref:
+            user_data = user.to_dict()
+            user_id = user.id
+            user_name = user_data.get("name", "Unknown")
+            interviews_ref = db.collection("users").document(user_id).collection("interviews").stream()
+            
+            # Get the latest interview for each user
+            latest_interview = None
+            latest_timestamp = None
+            for interview in interviews_ref:
+                interview_data = interview.to_dict()
+                timestamp = interview_data.get("timestamp")
+                if timestamp and (latest_timestamp is None or timestamp > latest_timestamp):
+                    latest_timestamp = timestamp
+                    latest_interview = interview_data
+
+            if latest_interview:
+                avg_score = latest_interview.get("average_score", 0)
+                timestamp = latest_timestamp.strftime("%Y-%m-%d %H:%M:%S") if latest_timestamp else "N/A"
+                leaderboard_data.append({
+                    "user_id": user_id,
+                    "user_name": user_name,
+                    "avg_score": round(avg_score, 2),
+                    "timestamp": timestamp
+                })
+
+        # Sort by average score in descending order
+        leaderboard_data = sorted(leaderboard_data, key=lambda x: x["avg_score"], reverse=True)
+        
+        logger.info("Leaderboard data fetched successfully")
+        return render_template("leaderboard.html", leaderboard_data=leaderboard_data)
+    except Exception as e:
+        logger.error(f"Error fetching leaderboard data: {str(e)}")
+        return render_template("error.html", error="Failed to load leaderboard")
+    
 if __name__ == "__main__":
     try:
         app.run(debug=True)

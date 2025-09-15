@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error - AI Interview</title>
+  <style>
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: linear-gradient(135deg, #ff000052, #0055ff52);
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    .error-container {
+      background: #ffffffec;
+      padding: 36px 28px;
+      border-radius: 36px;
+      border: 3px solid #3b2a32ff;
+      box-shadow: 0 20px 1000px rgba(255, 255, 255, 1);
+      max-width: 420px;
+      width: 92%;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .error-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 14px 36px rgba(0,0,0,0.18);
+      }
+
+      .home-btn:hover {
+        background: linear-gradient(135deg, #005fa3, #004080);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(0,120,215,0.3);
+      }
+    }
+
+    h1 {
+      font-size: 46px;
+      margin-bottom: 24px;
+      color: #3d3d3dff;
+      font-weight: 400;
+    }
+
+    .error {
+      color: #b20600ff;
+      margin-bottom: 20px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .home-btn {
+      width: 100%;
+      max-width: 420px;
+      padding: 14px;
+      background: linear-gradient(135deg, #4b93ceff, #003e6bff);
+      border: none;
+      border-radius: 8px;
+      color: #ffffffff;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      .home-btn:active {
+        background: #053b62ff;
+        transform: scale(0.97);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="error-container">
+    <h1>Error</h1>
+    <p class="error">{{ error }}</p>
+    <a href="{{ url_for('home') }}" class="home-btn">Back to Home</a>
+  </div>
+</body>
+</html>
