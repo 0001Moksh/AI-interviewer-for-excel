@@ -2,194 +2,149 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Excel Interview</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #0d1427, #1a2a6c, #b21f1f, #fdbb2d);
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-      margin: 0;
-      padding: 20px; /* Reduced padding for mobile */
-      overflow-x: hidden; /* Prevent horizontal scroll */
-    }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #0d1427, #1a2a6c, #b21f1f, #fdbb2d);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding: 70px;
+  }
 
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
 
+  .container {
+    background: rgba(0, 0, 0, 0.34);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    padding: 85px 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    max-width: 650px;
+    color: #fff;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  .progress-bar {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    height: 12px;
+    margin-bottom: 25px;
+    overflow: hidden;
+  }
+
+  .progress {
+    height: 100%;
+    background: linear-gradient(135deg, #4a6df7ff, #35d4c9ff);
+    border-radius: 10px;
+    width: calc(({{ step }} / {{ num_questions }}) * 100%);
+    transition: width 0.5s ease;
+  }
+
+  p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #f1f1f1;
+  }
+
+  textarea {
+    width: 97%;
+    border-radius: 12px;
+    border: none;
+    padding: 12px;
+    font-size: 1rem;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 40px;
+    max-height: 200px;
+    outline: none;
+    background: rgba(56, 56, 56, 0.15);
+    color: #fff;
+    box-shadow: inset 0 1px 4px rgba(255, 255, 255, 0.66);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  textarea:focus {
+    background: rgba(0, 0, 0, 0.13);
+    box-shadow: 0 0 0 2px #4a6cf7, inset 0 2px 8px rgba(0, 0, 0, 0.25);
+  }
+
+  .btn {
+    display: block;
+    margin: 25px auto 0 auto;
+    padding: 12px 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(135deg, #3754c7ff, #182695ff);
+    border: none;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 12px rgba(74, 108, 247, 0.4);
+    cursor: pointer;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #081fc9ff, #192b90ff);
+    box-shadow: 0px 6px 16px rgba(74, 108, 247, 0.6);
+  }
+
+  #particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 480px) {
     .container {
-      background: rgba(0, 0, 0, 0.34);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      padding: 30px 20px; /* Adjusted padding for better mobile spacing */
-      border-radius: 20px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
-      width: 100%;
-      max-width: 800px; /* Increased max-width for laptops */
-      color: #fff;
-      box-sizing: border-box; /* Ensure padding doesn't affect width */
+      padding: 25px 15px;
     }
-
     h1 {
-      font-size: clamp(1.4rem, 5vw, 1.8rem); /* Responsive font size */
-      font-weight: 700;
-      margin-bottom: 20px;
-      text-align: center;
+      font-size: 1.4rem;
     }
-
-    .progress-bar {
-      width: 100%;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 12px;
-      height: 16px; /* Increased height for better visibility */
-      margin-bottom: 30px;
-      overflow: hidden;
-    }
-
-    .progress {
-      height: 100%;
-      background: linear-gradient(135deg, #4a6cf7, #3548d4);
-      border-radius: 12px;
-      width: calc(({{ step }} / {{ num_questions }}) * 100%);
-      transition: width 0.5s ease;
-    }
-
     p {
-      font-size: clamp(0.9rem, 4vw, 1.1rem); /* Responsive font size */
-      margin-bottom: 25px;
-      text-align: center;
-      color: #f1f1f1;
-      line-height: 1.5; /* Improved readability */
+      font-size: 0.95rem;
     }
-
-    textarea {
-      width: 100%; /* Full width for consistency */
-      border-radius: 12px;
-      border: none;
-      padding: 15px; /* Increased padding for touch */
-      font-size: clamp(0.95rem, 4vw, 1rem);
-      font-family: inherit;
-      resize: vertical;
-      min-height: 150px; /* Increased height for mobile */
-      outline: none;
-      background: rgba(255, 255, 255, 0.15);
-      color: #fff;
-      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
-      transition: background 0.3s ease, box-shadow 0.3s ease;
-      box-sizing: border-box;
-    }
-
-    textarea:focus {
-      background: rgba(255, 255, 255, 0.25);
-      box-shadow: 0 0 0 2px #4a6cf7, inset 0 2px 8px rgba(0, 0, 0, 0.25);
-    }
-
     .btn {
-      display: block;
-      margin: 30px auto 0 auto;
-      padding: 14px 32px; /* Increased padding for touch */
-      font-size: clamp(0.95rem, 4vw, 1.1rem);
-      font-weight: 600;
-      color: #fff;
-      background: linear-gradient(135deg, #4a6cf7, #3548d4);
-      border: none;
-      border-radius: 12px;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0px 4px 12px rgba(74, 108, 247, 0.4);
-      cursor: pointer;
-      touch-action: manipulation; /* Improve touch responsiveness */
+      font-size: 0.95rem;
+      padding: 10px 20px;
     }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      background: linear-gradient(135deg, #3548d4, #2236a8);
-      box-shadow: 0px 6px 16px rgba(74, 108, 247, 0.6);
+    textarea {
+      min-height: 100px;
+      font-size: 0.95rem;
     }
+  }
+</style>
 
-    #particles-js {
-      position: fixed; /* Changed to fixed for better background effect */
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      body {
-        padding: 15px; /* Further reduced padding for smaller screens */
-      }
-
-      .container {
-        padding: 20px 15px; /* Adjusted for mobile */
-        max-width: 100%; /* Full width on smaller screens */
-      }
-
-      h1 {
-        font-size: clamp(1.2rem, 4.5vw, 1.6rem);
-      }
-
-      p {
-        font-size: clamp(0.85rem, 3.5vw, 1rem);
-      }
-
-      textarea {
-        min-height: 120px; /* Slightly smaller for mobile */
-        padding: 12px;
-      }
-
-      .btn {
-        padding: 12px 24px;
-        font-size: clamp(0.9rem, 3.5vw, 1rem);
-      }
-
-      .progress-bar {
-        height: 14px; /* Slightly smaller but still visible */
-      }
-    }
-
-    @media (max-width: 480px) {
-      body {
-        padding: 10px;
-      }
-
-      .container {
-        padding: 15px 10px;
-        border-radius: 16px; /* Slightly smaller radius for mobile */
-      }
-
-      h1 {
-        font-size: clamp(1.1rem, 4vw, 1.4rem);
-      }
-
-      p {
-        font-size: clamp(0.8rem, 3vw, 0.95rem);
-      }
-
-      textarea {
-        min-height: 100px;
-        padding: 10px;
-      }
-
-      .btn {
-        padding: 10px 20px;
-        font-size: clamp(0.85rem, 3vw, 0.95rem);
-      }
-    }
-  </style>
 </head>
 <body>
   <div id="particles-js"></div>
@@ -200,7 +155,7 @@
     </div>
     <p>{{ question }}</p>
     <form method="POST" action="{{ url_for('interview', session_id=session_id) }}">
-      <textarea name="answer" required></textarea>
+      <textarea name="answer" placeholder="Your Answer..." required></textarea>
       <button type="submit" class="btn">Submit Answer</button>
     </form>
   </div>
@@ -208,16 +163,16 @@
   <script>
     particlesJS('particles-js', {
       "particles": {
-        "number": { "value": 40, "density": { "enable": true, "value_area": 800 } }, /* Reduced particle count */
+        "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
         "color": { "value": "#ffffff" },
         "shape": { "type": "circle" },
         "opacity": { "value": 0.3 },
-        "size": { "value": 2.5, "random": true }, /* Smaller particles for mobile */
-        "line_linked": { "enable": true, "distance": 100, "color": "#ffffff", "opacity": 0.2, "width": 1 },
-        "move": { "enable": true, "speed": 2 } /* Slower speed for performance */
+        "size": { "value": 3, "random": true },
+        "line_linked": { "enable": true, "distance": 120, "color": "#ffffff", "opacity": 0.2, "width": 1 },
+        "move": { "enable": true, "speed": 3 }
       },
       "interactivity": {
-        "events": { "onhover": { "enable": false }, "onclick": { "enable": true, "mode": "push" } }, /* Disabled hover for mobile */
+        "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } },
         "modes": { "repulse": { "distance": 150, "duration": 0.4 } }
       },
       "retina_detect": true
@@ -225,4 +180,3 @@
   </script>
 </body>
 </html>
->>>>>>> 34b1493ad1702516964cd5ed7eb25ecad5e4df8f
